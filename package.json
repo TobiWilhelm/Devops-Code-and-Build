@@ -15,7 +15,16 @@
   },
   "devDependencies": {
     "jest": "^30.0.2",
+    "jest-junit": "^16.0.0",
     "nodemon": "^2.0.15",
     "supertest": "^7.1.1"
+  },
+  "jest": {
+  "reporters": [
+    "default",
+    ["jest-junit", {
+      "outputDirectory": "reports",
+      "outputName": "junit-report.xml" }]
+  ]
   }
 }

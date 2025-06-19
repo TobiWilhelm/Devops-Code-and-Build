@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="0.639">
+  <testsuite name="Notes API Integration Tests" errors="0" failures="0" skipped="0" timestamp="2025-06-19T17:22:53" time="0.479" tests="2">
+    <testcase classname="Notes API Integration Tests POST then GET: should return the new note in list" name="Notes API Integration Tests POST then GET: should return the new note in list" time="0.04">
+    </testcase>
+    <testcase classname="Notes API Integration Tests DELETE then GET: should remove the note from list" name="Notes API Integration Tests DELETE then GET: should remove the note from list" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="Notes API" errors="0" failures="0" skipped="0" timestamp="2025-06-19T17:22:54" time="0.1" tests="3">
+    <testcase classname="Notes API GET /api/notes returns JSON and status 200" name="Notes API GET /api/notes returns JSON and status 200" time="0.008">
+    </testcase>
+    <testcase classname="Notes API POST /api/notes creates a new note" name="Notes API POST /api/notes creates a new note" time="0.007">
+    </testcase>
+    <testcase classname="Notes API POST /api/notes without content returns 400" name="Notes API POST /api/notes without content returns 400" time="0.003">
+    </testcase>
+  </testsuite>
+</testsuites>
