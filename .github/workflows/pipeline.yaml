@@ -27,13 +27,3 @@ jobs:
         echo "${DOCKER_TAG}"
         docker build -t "${DOCKER_TAG}" .
         docker push "${DOCKER_TAG}"
-
-
-
-
-    # - uses: actions/setup-node@v4
-    #   with:
-    #     node-version: 22
-    # - run: npm ci
-
-    
