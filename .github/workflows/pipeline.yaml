@@ -16,9 +16,19 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 22
-    - run: |
-        npm ci
-        npm test -- --ci
+    
+    - run: npm ci
+
+    - name: Run tests
+      run: npm test -- --ci
+
+    - name: Test Report
+      uses: dorny/test-reporter@v2
+      if: ${{ !cancelled() }}
+      with:
+        name: JEST Tests
+        path: reports/junit-report.xml
+        reporter: jest-junit
 
   build:
     runs-on: ubuntu-latest
