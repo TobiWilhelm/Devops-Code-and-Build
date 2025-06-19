@@ -24,9 +24,9 @@ jobs:
     - name: Build and Push to Dockerhub
       run: |
         DOCKER_TAG = ${{ vars.DOCKER_USERNAME }}/devops-code-and-build:${GITHUB_SHA}
-        echo ${DOCKER_TAG}
-        docker build -t ${DOCKER_TAG} .
-        docker push ${DOCKER_TAG}
+        echo "${DOCKER_TAG}"
+        docker build -t "${DOCKER_TAG}" .
+        docker push "${DOCKER_TAG}"
 
 
 
