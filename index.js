@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const unused = 2
 
 let notes = [
   {
