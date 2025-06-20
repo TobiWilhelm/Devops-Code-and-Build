@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cilint": "eslint . --max-warnings=0"
   },
   "author": "",
   "license": "ISC",

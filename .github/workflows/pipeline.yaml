@@ -42,7 +42,7 @@ jobs:
     - name: Lint code
       run : |
         npm ci
-        npm run lint
+        npm run cilint
 
   build:
     runs-on: ubuntu-latest
