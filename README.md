@@ -1,3 +1,6 @@
+# Devops Code and Build
+Gruppe E: Lukas Lanegger, Tobias Jäger, Marcus Onisor und Tobias Jäger
+
 # Notes Backend
 
 This repository is used as a starting point for an assignment. Originally it is from the amazing MOOC [FullStackOpen](https://fullstackopen.com/)
