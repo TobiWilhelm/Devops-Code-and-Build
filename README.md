@@ -1,5 +1,5 @@
 # Devops Code and Build
-Gruppe E: Lukas Lanegger, Tobias Jäger, Marcus Onisor und Tobias Jäger
+Gruppe E: Lukas Lanegger, Tobias Jäger, Marcus Onisor und Tobias Wilhelm
 
 # Notes Backend
 
