@@ -1,6 +1,9 @@
 # Devops Code and Build
 Gruppe E: Lukas Lanegger, Tobias Jäger, Marcus Onisor und Tobias Wilhelm
 
+## Frontend
+Ein lightweight Frontend wurde mittels Tailwind css erstellt, um die Notizen einsehen und anlegen zu können.
+
 # Notes Backend
 
 This repository is used as a starting point for an assignment. Originally it is from the amazing MOOC [FullStackOpen](https://fullstackopen.com/)
