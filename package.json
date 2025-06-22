@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "cilint": "eslint . --max-warnings=0",
+    "lint:html": "htmlhint src/*.html"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +17,10 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
     "globals": "^16.2.0",
+    "htmlhint": "^1.6.3",
     "jest": "^30.0.2",
     "jest-junit": "^16.0.0",
     "nodemon": "^3.1.10",
