@@ -31,10 +31,12 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 22
-    - name: Lint code
+    - name: Lint JS code
       run : |
         npm ci
         npm run cilint
+    - name: Lint Html
+      run : npm run lint:html
 
   build:
     runs-on: ubuntu-latest
