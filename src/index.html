@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Note App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-6xl space-y-8">
+    <h1 class="text-3xl font-semibold text-center text-gray-800">My Notes</h1>
+
+    <div class="space-y-4">
+      <form id="noteForm" class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
+        <input
+          type="text"
+          id="noteInput"
+          placeholder="New note..."
+          required
+          class="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <label class="flex items-center text-sm text-gray-700">
+          <input type="checkbox" id="importantCheckbox" class="mr-2" />
+          Important
+        </label>
+        <button
+          type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+        >Add</button>
+      </form>
+
+      <form id="findForm" onsubmit="event.preventDefault(); findNote();" class="flex space-x-2">
+        <input
+          type="number"
+          id="findInput"
+          placeholder="Enter note ID..."
+          class="w-40 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+        >Find</button>
+      </form>
+
+      <div id="findResult" class="text-gray-600 text-sm"></div>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-medium text-gray-700 mb-2">All Notes</h2>
+      <div class="border border-gray-300 rounded-lg max-h-64 overflow-auto">
+        <table class="w-full text-left min-w-max">
+          <thead class="bg-gray-50 sticky top-0 z-10">
+            <tr>
+              <th class="px-4 py-2 text-gray-600 font-medium">ID</th>
+              <th class="px-4 py-2 text-gray-600 font-medium">Content</th>
+              <th class="px-4 py-2 text-gray-600 font-medium">Important</th>
+              <th class="px-4 py-2 text-gray-600 font-medium">Date</th>
+              <th class="px-4 py-2 text-gray-600 font-medium">Delete</th>
+            </tr>
+          </thead>
+          <tbody id="notesTable" class="bg-white divide-y divide-gray-200">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchNotes() {
+      const res = await fetch('/api/notes');
+      const notes = await res.json();
+      const tableBody = document.querySelector('#notesTable');
+      tableBody.innerHTML = '';
+      notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+      notes.forEach(note => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="px-4 py-2">${note.id}</td>
+          <td class="px-4 py-2">${note.content}</td>
+          <td class="px-4 py-2">${note.important ? 'Yes' : 'No'}</td>
+          <td class="px-4 py-2">${new Date(note.date).toLocaleString()}</td>
+          <td class="px-4 py-2">
+            <button onclick="deleteNote(${note.id})" class="text-red-600 hover:underline">❌</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    async function deleteNote(id) {
+      await fetch(`/api/notes/${id}`, { method: 'DELETE' });
+      fetchNotes();
+    }
+
+    document.getElementById('noteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('noteInput');
+      const isImportant = document.getElementById('importantCheckbox').checked;
+      await fetch('/api/notes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: input.value, important: isImportant })
+      });
+      input.value = '';
+      document.getElementById('importantCheckbox').checked = false;
+      fetchNotes();
+    });
+
+    async function findNote() {
+      const id = document.getElementById('findInput').value;
+      const resultDiv = document.getElementById('findResult');
+      if (!id) {
+        resultDiv.textContent = 'Please enter a note ID.';
+        return;
+      }
+      try {
+        const res = await fetch(`/api/notes/${id}`);
+        if (!res.ok) throw new Error('Not found');
+        const note = await res.json();
+        resultDiv.innerHTML = `
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-2 text-sm space-y-1">
+            <p><strong>ID:</strong> ${note.id}</p>
+            <p><strong>Content:</strong> ${note.content}</p>
+            <p><strong>Important:</strong> ${note.important ? 'Yes' : 'No'}</p>
+            <p><strong>Date:</strong> ${new Date(note.date).toLocaleString()}</p>
+          </div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = `<p class="text-red-600">Note not found.</p>`;
+      }
+    }
+
+    fetchNotes();
+  </script>
+</body>
+</html>
