@@ -22,6 +22,14 @@ jobs:
     - name: Run tests
       run: npm test -- --ci
 
+    - name: Test Report
+      uses: dorny/test-reporter@v2
+      if: ${{ !cancelled() }}
+      with:
+        name: "🧪 Jest Unit Tests"
+        path: reports/junit-report.xml
+        reporter: jest-junit
+
   lint:
     runs-on: ubuntu-latest
     needs: test
