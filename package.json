@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "lint": "eslint .",
+  "cilint": "eslint . --max-warnings=0",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
