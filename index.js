@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 
-const unused = 1
-
 app.use(express.static('src'))
 
 let notes = [
