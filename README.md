@@ -17,7 +17,7 @@ Für den Bereich der statischen Code Analyse haben wir uns für SonarQube Cloud 
 Final, wenn alle drei vorherigen Jobs positiv abschließen, wird der Build-Job ausgeführt. Hierbei wird das Docker Image auf Dockerhub gepusht.
 
 ## Dependabot
-Dependabot wurde zum Updaten von Fremdkomponenten verwendet. Der Bot erstellt einen Pull Request, was die Standard-Pipeline lostritt, jedoch ohne Zugriff auf die Secrets. Das führte zu failed Pipeline runs. Als fix haben wir folgende Line bei den Jobs code-analysis und build (diese nutzen ein secret) eingefügt: if: "github.actor != 'dependabot[bot]'"
+Dependabot wurde zum Updaten von Fremdkomponenten verwendet. Der Bot erstellt einen Pull Request, was die Standard-Pipeline lostritt, jedoch ohne Zugriff auf die Secrets. Das führte zu failed Pipeline runs. Als fix haben wir folgende Line bei den Jobs code-analysis und build (diese nutzen ein secret) eingefügt: if: "github.actor != 'dependabot[bot]'".
 
 # Notes Backend
 
