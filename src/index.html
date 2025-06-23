@@ -125,6 +125,7 @@
           </div>
         `;
       } catch (err) {
+        console.error('Error fetching note:', err); 
         resultDiv.innerHTML = `<p class="text-red-600">Note not found.</p>`;
       }
     }
